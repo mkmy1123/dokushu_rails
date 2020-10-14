@@ -1,4 +1,6 @@
 class Room < ApplicationRecord
+  has_many :entries, dependent: :destroy
+
   validates :name, :place, :number, presence: true
   validates :name, length: { maximum: 30 }
   validates :name, format: { with: /\+?#[0-9][0-9]/, message: "会議室名が正しくありません" }
