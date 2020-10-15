@@ -1,5 +1,8 @@
 class EntriesController < ApplicationController
   before_action :set_entry, only: [:destroy]
+  before_action :set_entry_params,
+          only: [:confirm, :confirm_back, :create]
+
 
   def index
     @entries = Entry.all
@@ -10,6 +13,13 @@ class EntriesController < ApplicationController
   end
 
   def confirm
+    if @entry.invalid?
+      render :new
+    end
+  end
+
+  def confirm_back
+    render :new
   end
 
   def create
@@ -31,6 +41,10 @@ class EntriesController < ApplicationController
   end
 
   private
+    def set_entry_params
+      @entry = Entry.new(entry_params)
+    end
+
     def set_entry
       @entry = Entry.find(params[:id])
     end
