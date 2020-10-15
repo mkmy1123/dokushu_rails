@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get 'top/index'
+  root to: 'top#index'
   resources :rooms
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :entries, only: [:new, :create, :destroy, :index], path: :rentals do
+    post 'comfirm', on: :collection
+  end
 end
