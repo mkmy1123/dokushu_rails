@@ -1,0 +1,20 @@
+<table>
+  <tr>
+    <th>user_name</th>
+    <th>user_email</th>
+    <th>reserved_date</th>
+    <th>usage_time</th>
+    <th>people</th>
+    <th>destroy</th>
+  </tr>
+  <% entries.each do |entry| %>
+    <tr>
+      <td><%= entry.user_name %></td>
+      <td><%= entry.user_email %></td>
+      <td><%= entry.reserved_date %></td>
+      <td><%= entry.usage_time %></td>
+      <td><%= entry.people %></td>
+      <td><%= link_to 'destroy', entry_path(entry), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>

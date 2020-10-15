@@ -6,7 +6,7 @@ class EntriesController < ApplicationController
   end
 
   def new
-    @entry = Entry.new
+    @entry = Entry.new(room_id: params[:room_id])
   end
 
   def confirm
@@ -15,16 +15,18 @@ class EntriesController < ApplicationController
   def create
     @entry = Entry.new(entry_params)
     respond_to do |format|
-      format.html { respond_to @entry, notice: 'success!' }
-    else
-      format.html { render :new }
+      if @entry.save
+        format.html { redirect_to @entry.room, notice: 'success!' }
+      else
+        format.html { render :new }
+      end
     end
   end
 
   def destroy
     @entry.destroy
     respond_to do |format|
-      format.html { redirect_to entries_url, notice: 'success!' }
+      format.html { redirect_to @entry.room, notice: 'success!' }
     end
   end
 

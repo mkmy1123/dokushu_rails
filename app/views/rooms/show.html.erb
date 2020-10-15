@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Reservation:</strong>
+  <%= link_to 'entry', new_entry_path(room_id: @room.id) %>
+</p>
+
+<p>
   <strong>Name:</strong>
   <%= @room.name %>
 </p>
@@ -14,6 +19,8 @@
   <strong>Number:</strong>
   <%= @room.number %>
 </p>
+
+<%= render partial: 'entries/entry', locals: {entries: @room.entries} %>
 
 <%= link_to 'Edit', edit_room_path(@room) %> |
 <%= link_to 'Back', rooms_path %>
