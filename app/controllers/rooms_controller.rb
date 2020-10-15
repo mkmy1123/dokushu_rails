@@ -28,6 +28,7 @@ class RoomsController < ApplicationController
 
     respond_to do |format|
       if @room.save
+        session[:room] = @room.name
         format.html { redirect_to @room, notice: 'Room was successfully created.' }
         format.json { render :show, status: :created, location: @room }
       else
